@@ -58,7 +58,7 @@ void main() {
                 case 7 -> planoCartesiano(input);
                 case 8 -> impostoRenda(input, nf);
                 case 0 -> println("Encerrando! ");
-                //Implementação do default caso seja digitado algum número que esteja fora do switch case
+                //Utilizando o default caso seja digitado algum número que esteja fora do switch case
                 default -> {
                     String erro = "\u001b[31m";
                     String reset = "\u001B[0m";
@@ -154,33 +154,20 @@ public static void tabelaPreco(Scanner input, NumberFormat nf) {
         op = input.nextInt();
 
         try {
-            if (op == 1) {
-                valor = 4;
-                totalvalor += valor;
-                println("Total a pagar: " + nf.format(totalvalor));
-            } else if (op == 2) {
-                valor = 4.50;
-                totalvalor += valor;
-                println("Total a pagar: " + nf.format(totalvalor));
-            } else if (op == 3) {
-                valor = 5.00;
-                totalvalor += valor;
-                println("Total a pagar: " + nf.format(totalvalor));
-            } else if (op == 4) {
-                valor = 2.00;
-                totalvalor += valor;
-                println("Total a pagar: " + nf.format(totalvalor));
-            } else if (op == 5) {
-                valor = 1.5;
-                totalvalor += valor;
-                println("Total a pagar: " + nf.format(totalvalor));
-            }
+            totalvalor += switch (op) {
+                case 1 -> 4.0;
+                case 2 -> 4.5;
+                case 3 -> 5.0;
+                case 4 -> 2.0;
+                case 5 -> 1.5;
+                default -> 0.0;
+            };
+            println("Total atual: " + nf.format(totalvalor));
         } catch (InputMismatchException e) {
             String erro = "\u001b[31m";
             String reset = "\u001B[0m";
             println(erro + "Erro: Digite apenas os números relacionados ao cardápio!" + reset);
             input.nextLine();
-
         }
 
     } while (op != 0);
@@ -230,35 +217,37 @@ public static void impostoRenda(Scanner input, NumberFormat nf) {
     double renda;
     println("Digite sua renda mensal: ");
     renda = input.nextDouble();
-    double impostoDeRenda;
 
-    if (renda <= 2000.00) {
-        impostoDeRenda = 0.0;
-    } else if (renda <= 3000.00) {
-        impostoDeRenda = (renda - 2000.00) * 0.08;
-    } else if (renda <= 4500.00) {
-        impostoDeRenda = (1000 * 0.08) + (renda - 3000.01) * 0.18;
-    } else {
-        impostoDeRenda = (1000 * 0.08) + (1500.00 * 0.18) + (renda - 4500) * 0.28;
-    }
+    /** Não é possível utilizar Pattern Matching usando tipos primitivos, então seguimos com Wrapper, aqui criamos um Obj chamado renda, para utilizar switch-case no lugar do if-else **/
+    Double rendaObj = renda;
 
-    //Verificando se possui imposto de renda
+    double impostoDeRenda = switch (rendaObj) {
+        case Double r when r <= 2000.00 -> 0.0;
+        case Double r when r <= 3000.01 -> (r - 2000.00) * 0.08;
+        case Double r when r <= 4500.00 -> (1000.00 * 0.08) + (r - 3000.01) * 0.18;
+        case Double r when r > 4500 -> (1000.00 * 0.8) + (1500.00 * 0.18) + (r - 4500.00) * 0.28;
+        default -> 0.0;
+    };
+
     if (impostoDeRenda == 0.0) {
         println("Isento! ");
     } else {
         println(nf.format(impostoDeRenda) + " De imposto para pagar!");
     }
 
-    /** Opcional: Pattern Matching (Não recomendado)
-     * double impostoDeRenda = switch (renda) {
-     * case double r when r <= 2000.00 -> 0.0;
-     * case double r when r <= 3000.01 -> (r - 2000.00) * 0.08;
-     * case double r when r <= 4500.00 -> (1000.00 * 0.08) + (r - 3000.01) * 0.18;
-     * case double r when r > 4500 -> (1000.00 * 0.8) + (1500.00 * 0.18) + (r - 4500.00) * 0.28;
-     * default -> 0.0;
-     * };
-     */
+    /* ###Este formato exige flags experimentais no JDK 25###
+    O seletor de switch para tipos primitivos (double minúsculo) ainda é um recurso de 'Preview'.
+   Para contornar isso e usar o Pattern Matching de forma estável no Java 21+,
+   utilizamos o Wrapper 'Double' (Objeto), que permite o uso de 'case Double r when...
+
+    double impostoDeRenda = switch (renda) {
+        case double r when r <= 2000.00 -> 0.0;
+        case double r when r <= 3000.00 -> (r - 2000.00) * 0.08;
+        case double r when r <= 4500.00 -> (1000.00 * 0.08) + (r - 3000.00) * 0.18;
+        case double r when r > 4500.00  -> (1000.00 * 0.08) + (1500.00 * 0.18) + (r - 4500.00) * 0.28;
+        default -> 0.0;
+    };
+    */
+
 }
-
-
 
