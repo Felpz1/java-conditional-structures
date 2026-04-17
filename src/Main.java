@@ -28,33 +28,50 @@ void main() {
     NumberFormat nf = NumberFormat.getCurrencyInstance(bra);
     Scanner input = new Scanner(System.in);
 
-    int opcao;
+    int opcao = -1;
     do {
-        //Classes de declaração implicita (Println)
-        println("\n\nEscolha o exercício para testar");
-        println("1 - Negativo ou Não");
-        println("2 - Número ímpar ou par");
-        println("3 - Números Múltiplos");
-        println("4 - Duração de Jogo");
-        println("5 - Tabela de preços");
-        println("6 - Intervalos");
-        println("7 - Coordenadas / quadrantes");
-        println("8 - Imposto de Renda");
-        println("0 - Sair");
+        //Try-Catch para evitar erros do java gerado por digitação, caso o usuário digite alguma letra no lugar de número, por exemplo.
+        try {
+            //Classes de declaração implicita (Println)
+            println("\nEscolha o exercício para testar");
+            println("1 - Negativo ou Não");
+            println("2 - Número ímpar ou par");
+            println("3 - Números Múltiplos");
+            println("4 - Duração de Jogo");
+            println("5 - Tabela de preços");
+            println("6 - Intervalos");
+            println("7 - Coordenadas / quadrantes");
+            println("8 - Imposto de Renda");
+            println("0 - Sair");
 
-        opcao = input.nextInt();
-        input.nextLine();
+            opcao = input.nextInt();
+            input.nextLine();
 
-        //Utilizando SwitchCase para selecionar o exercício solucionado
-        switch (opcao) {
-            case 1 -> negativoOuNao(input);
-            case 2 -> imparOuPar(input);
-            case 3 -> numerosMultiplos(input);
-            case 4 -> duracaoJogo(input);
-            case 5 -> tabelaPreco(input, nf);
-            case 6 -> intervaloDeNumeros(input);
-            case 7 -> planoCartesiano(input);
-            case 8 -> impostoRenda(input, nf);
+            //Utilizando SwitchCase para selecionar o exercício solucionado
+            switch (opcao) {
+                case 1 -> negativoOuNao(input);
+                case 2 -> imparOuPar(input);
+                case 3 -> numerosMultiplos(input);
+                case 4 -> duracaoJogo(input);
+                case 5 -> tabelaPreco(input, nf);
+                case 6 -> intervaloDeNumeros(input);
+                case 7 -> planoCartesiano(input);
+                case 8 -> impostoRenda(input, nf);
+                case 0 -> println("Encerrando! ");
+                //Implementação do default caso seja digitado algum número que esteja fora do switch case
+                default -> {
+                    String erro = "\u001b[31m";
+                    String reset = "\u001B[0m";
+                    print(erro + "Erro: Digite apenas os números listados!" + reset);
+                }
+            }
+        }
+        //Caso o java apresente algum erro gerado por digitação irá executar esse código e voltar ao switch case
+        catch (InputMismatchException e) {
+            String erro = "\u001b[31m";
+            String reset = "\u001B[0m";
+            print(erro + "Erro: Digite apenas os números listados!" + reset);
+            input.nextLine();
         }
     } while (opcao != 0);
 }
@@ -136,26 +153,34 @@ public static void tabelaPreco(Scanner input, NumberFormat nf) {
         println("0 - Encerrar");
         op = input.nextInt();
 
-        if (op == 1) {
-            valor = 4;
-            totalvalor = totalvalor + valor;
-            println("Total a pagar: " + nf.format(totalvalor));
-        } else if (op == 2) {
-            valor = 4.50;
-            totalvalor = totalvalor + valor;
-            println("Total a pagar: " + nf.format(totalvalor));
-        } else if (op == 3) {
-            valor = 5.00;
-            totalvalor = totalvalor + valor;
-            println("Total a pagar: " + nf.format(totalvalor));
-        } else if (op == 4) {
-            valor = 2.00;
-            totalvalor = totalvalor + valor;
-            println("Total a pagar: " + nf.format(totalvalor));
-        } else if (op == 5) {
-            valor = 1.5;
-            totalvalor = totalvalor + valor;
-            println("Total a pagar: " + nf.format(totalvalor));
+        try {
+            if (op == 1) {
+                valor = 4;
+                totalvalor += valor;
+                println("Total a pagar: " + nf.format(totalvalor));
+            } else if (op == 2) {
+                valor = 4.50;
+                totalvalor += valor;
+                println("Total a pagar: " + nf.format(totalvalor));
+            } else if (op == 3) {
+                valor = 5.00;
+                totalvalor += valor;
+                println("Total a pagar: " + nf.format(totalvalor));
+            } else if (op == 4) {
+                valor = 2.00;
+                totalvalor += valor;
+                println("Total a pagar: " + nf.format(totalvalor));
+            } else if (op == 5) {
+                valor = 1.5;
+                totalvalor += valor;
+                println("Total a pagar: " + nf.format(totalvalor));
+            }
+        } catch (InputMismatchException e) {
+            String erro = "\u001b[31m";
+            String reset = "\u001B[0m";
+            println(erro + "Erro: Digite apenas os números relacionados ao cardápio!" + reset);
+            input.nextLine();
+
         }
 
     } while (op != 0);
