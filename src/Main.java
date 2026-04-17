@@ -141,7 +141,7 @@ public static void tabelaPreco(Scanner input, NumberFormat nf) {
 
     //As variáveis devem ser definidas antes do loop para que não que não seja zerado os valores.
     int op;
-    double valor, totalvalor = 0;
+    double totalvalor = 0;
     do {
 
         println("###SELECIONE O ITEM PARA ADICIONAR###");
