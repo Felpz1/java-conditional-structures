@@ -28,7 +28,7 @@
 </p>
 
 <ul>
-  <li><b>Lógica Progressiva:</b> No cálculo de Imposto de Renda (Ex 08), usei <code>if/else</code> clássico para garantir que os cálculos por faixas ficassem perfeitos e estáveis.</li>
+  <li><b>Switch Pattern Matching:</b> No cálculo de Imposto de Renda (Ex 08), usei <code>switch</code> com <code>when</code> clauses. Foi a melhor forma de aplicar uma lógica progressiva de forma limpa, tratando cada faixa de valor como um "padrão" específico.</li>
   <li><b>R$ Automático:</b> No exercício de preços (Ex 05), usei <code>NumberFormat</code> com <code>Locale</code> brasileiro para o Java colocar o símbolo de Real e as vírgulas sozinho.</li>
   <li><b>Ponto vs Vírgula:</b> Configurei o <code>Locale.setDefault(Locale.US)</code> logo no início. Assim o terminal aceita o ponto decimal (padrão de programador) e evita aquele erro chato de <i>InputMismatch</i>.</li>
 </ul>
