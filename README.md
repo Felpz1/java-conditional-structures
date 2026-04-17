@@ -1,84 +1,56 @@
 <div align="center">
   <h1>☕ Java Conditional Structures</h1>
-  <p><i>Resolução de desafios de lógica com o poder e a elegância do Java Moderno (JDK 25).</i></p>
+  <p>Exercícios de lógica (Nélio Alves & Beecrowd) resolvidos com o que há de mais novo no Java 25.</p>
 </div>
 
 <hr>
 
-<h2>📖 Descrição</h2>
+<blockquote>
+  <b>⚠️ Nota sobre o histórico:</b> Se você notar poucos commits, é porque precisei fazer uma limpeza pesada no repositório para remover arquivos de configuração da IDE (.idea, out, .iml) que acabaram subindo por erro de rastreio. Resetei o histórico para manter o projeto limpo e profissional.
+</blockquote>
+
+<h2>📖 O que é este projeto?</h2>
 <p>
-  Este repositório reúne as minhas resoluções para os exercícios de <b>Estrutura Condicional</b> do curso do <b>Prof. Nélio Alves</b> e da plataforma <b>Beecrowd</b>. 
-  O diferencial deste projeto é o uso das novas <b>JEPs (Java Enhancement Proposals)</b> para criar um código limpo, focado na lógica e livre de burocracias (boilerplate).
+  Aqui estão as minhas resoluções para os desafios de <b>Estrutura Condicional</b>. A ideia não foi só resolver os exercícios, mas aplicar as novidades do Java (JDK 21 ao 25) para escrever um código mais limpo e sem aquela "burocracia" (boilerplate) de antigamente.
 </p>
 
-<h2>🛠️ Recursos Modernos Utilizados (Java 21+)</h2>
+<h2>🛠️ O que usei de Java Moderno</h2>
 <ul>
-  <li><b>Implicitly Declared Classes (JEP 463):</b> Removi a estrutura clássica de <code>public class</code>, mantendo o código focado diretamente nos métodos.</li>
-  <li><b>Flexible Main Methods:</b> O método <code>main</code> não exige mais os modificadores <code>static</code> ou o parâmetro <code>String[] args</code>.</li>
-  <li><b>Static IO Imports (JEP 477):</b> Uso de importações estáticas para <code>println</code> e <code>print</code>, tornando o código mais conciso.</li>
-  <li><b>Switch Expressions:</b> Menu principal implementado com a sintaxe de setas (<code>-></code>), eliminando o uso manual de <code>break</code>.</li>
+  <li><b>Fim do "public class":</b> Usei <i>Implicitly Declared Classes</i>. O código começa direto nos métodos, sem precisar envolver tudo em uma classe Main.</li>
+  <li><b>Main simplificado:</b> Nada de <code>static void main(String[] args)</code>. O Java 25 permite um <code>main</code> muito mais direto.</li>
+  <li><b>Println direto:</b> Importei o <code>java.lang.IO</code> de forma estática, então uso apenas <code>println()</code> em vez do longo <code>System.out.println()</code>.</li>
+  <li><b>Switch moderno:</b> No menu principal, usei <i>Switch Expressions</i> com setas (<code>-></code>). É bem mais seguro e você não esquece o <code>break</code>.</li>
 </ul>
 
-<h2>💡 Diferentes Abordagens</h2>
+<h2>💡 Como resolvi os problemas</h2>
 <p>
-  Optei por alternar entre estilos de codificação para demonstrar versatilidade:
+  Tentei equilibrar o jeito que o mercado usa hoje com o que está vindo por aí:
 </p>
 
-<table align="center">
-  <tr>
-    <th>Abordagem</th>
-    <th>Exemplo no Código</th>
-    <th>Meu Objetivo</th>
-  </tr>
-  <tr>
-    <td><b>Clássica (Imperativa)</b></td>
-    <td><code>if / else if</code> (Ex: Exercício 8)</td>
-    <td>Garantir cálculos precisos por faixas de valores sem depender de recursos experimentais (Preview).</td>
-  </tr>
-  <tr>
-    <td><b>Internacionalização</b></td>
-    <td><code>NumberFormat</code> (Ex: Exercício 5)</td>
-    <td>Formatar moedas automaticamente para o padrão brasileiro (<b>R$</b>) usando <code>Locale</code>.</td>
-  </tr>
-  <tr>
-    <td><b>Globalização de Input</b></td>
-    <td><code>Locale.setDefault(Locale.US)</code></td>
-    <td>Padronizar a entrada de dados (Scanner) com ponto decimal para evitar erros de sistema.</td>
-  </tr>
-</table>
+<ul>
+  <li><b>Lógica Progressiva:</b> No cálculo de Imposto de Renda (Ex 08), usei <code>if/else</code> clássico para garantir que os cálculos por faixas ficassem perfeitos e estáveis.</li>
+  <li><b>R$ Automático:</b> No exercício de preços (Ex 05), usei <code>NumberFormat</code> com <code>Locale</code> brasileiro para o Java colocar o símbolo de Real e as vírgulas sozinho.</li>
+  <li><b>Ponto vs Vírgula:</b> Configurei o <code>Locale.setDefault(Locale.US)</code> logo no início. Assim o terminal aceita o ponto decimal (padrão de programador) e evita aquele erro chato de <i>InputMismatch</i>.</li>
+</ul>
 
 <hr>
 
-<h2>🧪 Extra: Exploração de Java Experimental</h2>
+<h2>🧪 Bônus: Testando o futuro</h2>
 <p>
-  Durante o desenvolvimento, explorei o uso de <b>Pattern Matching para tipos primitivos (JEP 455)</b>. 
-  Embora o código torne a lógica mais declarativa, optei por deixá-lo apenas como <b>comentário</b> no código fonte para manter a compatibilidade estável.
+  Deixei comentado no código um estudo sobre <b>Pattern Matching para tipos primitivos</b>. É um jeito de fazer o switch entender intervalos de números (usando <code>when</code>). Não ativei no código principal para não precisar de flags experimentais, mas o rascunho está lá para quem quiser ver.
 </p>
 
 <details>
-  <summary><b>Clique para ver o rascunho com Pattern Matching</b></summary>
-  <br>
+  <summary>🔎 Ver rascunho do Switch moderno</summary>
 
 ```java
-// Estudo de Pattern Matching (atualmente comentado no Exercício 8)
+// Estudo de Pattern Matching comentado no Exercício 8
 double impostoDeRenda = switch (renda) {
     case double r when r <= 2000.00 -> 0.0;
     case double r when r <= 3000.00 -> (r - 2000.00) * 0.08;
-    case double r when r <= 4500.00 -> (1000.00 * 0.08) + (r - 3000.00) * 0.18;
-    case double r when r > 4500.00  -> (1000.00 * 0.08) + (1500.00 * 0.18) + (r - 4500.00) * 0.28;
+    case double r when r > 4500.00  -> ...
     default -> 0.0;
 };
-````
-<h2>🚀 Como Executar</h2>
-<p>
-  Como este projeto utiliza a estrutura de <b>Single-File Source-Code</b> do Java moderno, você não precisa compilar manualmente para testar. Basta ter o <b>JDK 25</b> instalado.
-</p>
-
-<p>No seu terminal, dentro da pasta do projeto, execute:</p>
-
-```bash
-java Main.java
-
 
 
 

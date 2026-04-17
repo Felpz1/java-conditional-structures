@@ -244,7 +244,7 @@ public static void impostoRenda(Scanner input, NumberFormat nf) {
 
     //Verificando se possui imposto de renda
     if (impostoDeRenda == 0.0) {
-        println("Isento!");
+        println("Isento! ");
     } else {
         println(nf.format(impostoDeRenda) + " De imposto para pagar!");
     }
